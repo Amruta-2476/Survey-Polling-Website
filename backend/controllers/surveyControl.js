@@ -8,7 +8,19 @@ const getAllSurvey =  async (req, res) => {
   }
   
 // get a single survey
-
+const getOneSurvey = async (req, res) => {
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such survey'})
+      }
+    
+      const survey = await Survey.findById(id)
+    
+      if (!survey) {
+        return res.status(404).json({error: 'No such survey'})
+      }
+      res.status(200).json(survey)
+}
 
 // create a new survey
 const createSurvey = async (req, res) => {
@@ -28,5 +40,7 @@ const createSurvey = async (req, res) => {
 //update a survey
 
 module.exports = {
+    getAllSurvey,
+    getOneSurvey,
     createSurvey,
 }

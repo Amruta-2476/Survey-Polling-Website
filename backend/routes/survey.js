@@ -1,20 +1,18 @@
 const express = require('express')
 const {
   createSurvey,
+  getAllSurvey,
+  getOneSurvey,
 } = require('../controllers/surveyControl')
 
 
 const router = express.Router()
 
 // GET all surveys
-router.get('/', (req, res) => {
-    res.json({mssg: 'GET all surveys'})
-})
+router.get('/', getAllSurvey)
 
 // GET a single survey
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'GET a single survey'})
-  })
+router.get('/:id', getOneSurvey)
 
 // POST a new survey
 router.post('/', createSurvey)
