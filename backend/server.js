@@ -4,6 +4,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const surveyRoutes = require('./routes/survey')
 
+const mongoUri = `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASS}@cluster0.m2hopr5.mongodb.net/?retryWrites=true&w=majority` 
+
 // express app
 const app = express()
 
@@ -18,7 +20,7 @@ app.use((req, res, next) => {
 app.use('/api/survey', surveyRoutes)
 
 // connect to db
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(mongoUri)
   .then(() => {
     console.log('connected to database')
     // listen to port
