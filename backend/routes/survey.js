@@ -3,6 +3,8 @@ const {
   createSurvey,
   getAllSurvey,
   getOneSurvey,
+  deleteSurvey,
+  updateSurvey
 } = require('../controllers/surveyControl')
 
 
@@ -18,12 +20,8 @@ router.get('/:id', getOneSurvey)
 router.post('/', createSurvey)
   
 // DELETE a survey
-router.delete('/:id', (req, res) => {
-    res.json({mssg: 'DELETE a survey'})
-})
+router.delete('/:id', deleteSurvey)
   
 // UPDATE a survey
-router.patch('/:id', (req, res) => {
-    res.json({mssg: 'UPDATE a survey'})
-  })
+router.patch('/:id', updateSurvey)
 module.exports = router

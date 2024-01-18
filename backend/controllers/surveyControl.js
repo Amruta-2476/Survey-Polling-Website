@@ -48,10 +48,24 @@ const deleteSurvey = async (req, res) => {
 }
 
 //update a survey
+const updateSurvey = async (req, res) => {
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({error: 'No such survey'})
+    }
+    const survey = await Survey.findOneAndUpdate({_id: id}, {
+      ...req.body
+    })
+    if (!survey) {
+      return res.status(400).json({error: 'No such survey'})
+    }
+    res.status(200).json(survey)
+  }
 
 module.exports = {
     getAllSurvey,
     getOneSurvey,
     createSurvey,
-    deleteSurvey
+    deleteSurvey,
+    updateSurvey
 }
