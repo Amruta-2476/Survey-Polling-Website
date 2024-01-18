@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSurveysContext } from '../hooks/useSurveysContext'
+
 // components
 import SurveyDetails from '../components/SurveyDetails'
+import SurveyForm from "../components/SurveyForm";
 
 const Home = () => {
-  const [survey, setSurveys] = useState(null);
+  const { survey, dispatch } = useSurveysContext()
 
   useEffect(() => {
     const fetchSurveys = async () => {
@@ -11,20 +14,21 @@ const Home = () => {
       const json = await response.json();
 
       if (response.ok) {
-        setSurveys(json);
+        dispatch({type: 'SET_SURVEYS', payload: json})
       }
     };
 
     fetchSurveys();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="home">
           <div className="survey">
-              {survey && survey.map((survey) => (
+              {survey && survey.map(survey => (
                  <SurveyDetails key={survey._id} survey={survey} />
               ))}
           </div>
+          <SurveyForm />
     </div>
   );
 };
