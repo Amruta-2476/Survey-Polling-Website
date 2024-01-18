@@ -21,7 +21,7 @@ const SurveyDetails = ({ survey }) => {
             <h4>{survey.title}</h4>
             {/* <p><strong>Number of Responses: </strong>{numberOfResponses}</p> */}
             <p>{survey.createdAt}</p>
-            <span onClick={handleClick}>Delete</span>
+            <span className="material-symbols-outlined" onClick={handleClick}>Delete</span>
        </div>
    )
 }

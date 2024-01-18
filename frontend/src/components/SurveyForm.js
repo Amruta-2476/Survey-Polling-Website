@@ -7,6 +7,7 @@ const SurveyForm = () => {
   const [title, setTitle] = useState('');
   const [questions, setQuestions] = useState([{ questionText: '', options: [''] }]);
   const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,9 +26,11 @@ const SurveyForm = () => {
 
     if (!response.ok) {
       setError(json.error);
+      setEmptyFields(json.emptyFields)
     }
 
     if (response.ok) {
+      setEmptyFields([])
       setError(null);
       setTitle('');
       setQuestions([{ questionText: '', options: [''] }]);
@@ -74,7 +77,9 @@ const SurveyForm = () => {
       <h3>Create a New Survey</h3>
 
       <label>Survey Title:</label>
-      <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} />
+      <input type="text" onChange={(e) => setTitle(e.target.value)} value={title}
+      className={emptyFields.includes('title') ? 'error' : ''}
+      />
 
       {questions.map((question, questionIndex) => (
         <div key={questionIndex}>
@@ -84,6 +89,7 @@ const SurveyForm = () => {
               type="text"
               value={question.questionText}
               onChange={(e) => handleQuestionChange(questionIndex, 'questionText', e.target.value)}
+              className={emptyFields.includes('question') ? 'error' : ''}
             />
           </label>
 
