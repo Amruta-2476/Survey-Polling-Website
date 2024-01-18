@@ -24,15 +24,34 @@ const getOneSurvey = async (req, res) => {
 
 // create a new survey
 const createSurvey = async (req, res) => {
-    const { question, options, responses } = req.body
-   // add to the database
-    try {
-      const survey = await Survey.create({question, options, responses})
-      res.status(200).json(survey)
-    } catch (error) {
-      res.status(400).json({error: error.message})
+  try {
+    const { title, questions } = req.body;
+
+    // Create an array to store processed questions
+    const processedQuestions = [];
+
+    // Iterate through each question in the request body
+    for (const { questionText, options } of questions) {
+      const processedQuestion = {
+        questionText,
+        options,
+        responses: [], // Initialize responses as an empty array for each question
+      };
+      processedQuestions.push(processedQuestion);
     }
-}
+
+    // Create the survey with the processed questions
+    const survey = await Survey.create({
+      title,
+      questions: processedQuestions,
+    });
+
+    res.status(200).json(survey);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 
 //delete a survey
 const deleteSurvey = async (req, res) => {
