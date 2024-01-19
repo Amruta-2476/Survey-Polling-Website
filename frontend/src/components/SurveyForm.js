@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useSurveysContext } from '../hooks/useSurveysContext'
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const SurveyForm = () => {
   const { dispatch } = useSurveysContext()
+  const { user } = useAuthContext()
 
   const [title, setTitle] = useState('');
   const [questions, setQuestions] = useState([{ questionText: '', options: [''] }]);
@@ -12,6 +14,11 @@ const SurveyForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!user) {
+      setError('You must be logged in')
+      return
+    }
+
     const survey = { title, questions };
 
     const response = await fetch('/api/survey', {
@@ -19,6 +26,7 @@ const SurveyForm = () => {
       body: JSON.stringify(survey),
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
       },
     });
 

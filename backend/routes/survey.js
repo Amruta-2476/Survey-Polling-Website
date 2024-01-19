@@ -6,9 +6,11 @@ const {
   deleteSurvey,
   updateSurvey
 } = require('../controllers/surveyControl')
-
+const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
+// require auth for all survey routes
+router.use(requireAuth)
 
 // GET all surveys
 router.get('/', getAllSurvey)

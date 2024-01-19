@@ -1,15 +1,24 @@
 import { useSurveysContext } from '../hooks/useSurveysContext'
 //date fns = to format date
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { useAuthContext } from '../hooks/useAuthContext';
 
 import React from 'react';
 const SurveyDetails = ({ survey }) => { 
       // Calculate the number of responses
     //   const numberOfResponses = survey.getNumberOfResponses();
+   
     const { dispatch } = useSurveysContext()
+    const { user } = useAuthContext()
     const handleClick = async () => {
+        if (!user) {
+        alert('You must be logged in to delete a survey')
+        }
         const response = await fetch('/api/survey/' + survey._id, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
         })
         const json = await response.json()
         
