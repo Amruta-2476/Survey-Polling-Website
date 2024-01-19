@@ -32,6 +32,10 @@ header a {
   padding: 0px 16px 16px 16px;
   margin: 0 auto;
 }
+.material-symbols-outlined{
+  cursor: pointer;
+}
+
 /* homepage */
 .home {
   display: grid;
@@ -53,6 +57,9 @@ header a {
   position: relative;
   box-shadow: 2px 2px 5px rgba(0.3,0.3,0.5,0.5);
   cursor: pointer;
+}
+.survey-details:hover{
+  box-shadow: 6px 7px 20px grey;  
 }
 .survey-details h4 {
   margin: 0 0 10px 0;
