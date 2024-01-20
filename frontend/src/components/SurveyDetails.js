@@ -2,6 +2,7 @@ import { useSurveysContext } from '../hooks/useSurveysContext'
 //date fns = to format date
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { useAuthContext } from '../hooks/useAuthContext';
+import { Link } from 'react-router-dom';
 
 import React from 'react';
 const SurveyDetails = ({ survey }) => { 
@@ -29,12 +30,14 @@ const SurveyDetails = ({ survey }) => {
 
     
     return (
+        <Link to={`/survey/${survey._id}`}>
         <div className="survey-details">
             <h4>{survey.title}</h4>
             {/* <p><strong>Number of Responses: </strong>{numberOfResponses}</p> */}
             <p>{formatDistanceToNow(new Date(survey.createdAt), { addSuffix: true })}</p>
             <span className="material-symbols-outlined" onClick={handleClick}>Delete</span>
-       </div>
+            </div>
+            </Link>
    )
 }
 export default SurveyDetails;

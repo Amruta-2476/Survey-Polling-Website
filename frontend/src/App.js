@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useAuthContext } from "./hooks/useAuthContext";
 
 // pages & components
@@ -8,6 +9,8 @@ import Greeting from "./components/Greeting";
 import Navbar from './components/Navbar'
 import Login from './pages/Login'
 import Signup from './pages/SignUp'
+// import SurveyDetails from './SurveyDetails';
+import SurveyFillPage from './components/SurveyFillPage'; 
 
 function App() {
   const { user } = useAuthContext()
@@ -36,7 +39,9 @@ function App() {
               element={!user ? <Signup /> : <Navigate to='/' />} 
             />
 
-<Route path="/greeting" element={<Greeting />} /> 
+            <Route path="/greeting" element={<Greeting />} /> 
+            
+            <Route path="/survey/:id" element={<SurveyFillPage />} />
           </Routes>
         </div>
       </BrowserRouter>
