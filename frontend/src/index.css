@@ -178,3 +178,9 @@ div.signup, div.login {
   background: #1aac83;
   color: white;
 }
+.tabs{
+  display: inline-block;
+  position: relative;
+  right: 50%;
+}
+

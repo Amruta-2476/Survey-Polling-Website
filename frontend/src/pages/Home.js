@@ -1,3 +1,4 @@
+// Home.js is the default page which has only the surveys
 import { useEffect } from "react";
 import { useSurveysContext } from '../hooks/useSurveysContext'
 import { useAuthContext } from '../hooks/useAuthContext'

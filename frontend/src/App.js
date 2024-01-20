@@ -3,6 +3,7 @@ import { useAuthContext } from "./hooks/useAuthContext";
 
 // pages & components
 import Home from './pages/Home'
+import PollHome from "./pages/PollHome";
 import Greeting from "./components/Greeting";
 import Navbar from './components/Navbar'
 import Login from './pages/Login'
@@ -22,6 +23,10 @@ function App() {
               path="/" 
               element={user ? <Home /> : <Navigate to="/login" />} 
             />
+            {/* <Route
+              path="/pollHome" 
+              element={user ? <PollHome /> : <Navigate to="/login" />} 
+            /> */}
             <Route 
               path="/login" 
               element={!user ? <Login /> : <Navigate to='/' />} 
