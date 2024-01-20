@@ -124,6 +124,13 @@ nav {
 nav a {
   margin-left: 10px;
 }
+
+.loginSignUp:hover{
+  cursor: pointer;
+  position: relative;
+  bottom: 6px;
+}
+
 nav button {
   background: #fff;
   color: var(--primary);
