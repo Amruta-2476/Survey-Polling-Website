@@ -120,23 +120,23 @@ const SurveyForm = () => {
             </div>
           ))}
 
-          <button type="button" onClick={() => handleAddOption(questionIndex)}>
+          <button className='form-buttons' type="button" onClick={() => handleAddOption(questionIndex)}>
             Add Option
           </button>
 
           {questions.length > 1 && (
-            <button type="button" onClick={() => handleRemoveQuestion(questionIndex)}>
+            <button className='form-buttons' type="button" onClick={() => handleRemoveQuestion(questionIndex)}>
               Remove Question
             </button>
           )}
         </div>
       ))}
 
-      <button type="button" onClick={handleAddQuestion}>
+      <button className='form-buttons' type="button" onClick={handleAddQuestion}>
         Add Question
       </button>
 
-      <button type="submit">Create Survey</button>
+      <button className='form-buttons' type="submit">Create Survey</button>
       {error && <div className="error">{error}</div>}
     </form>
   );

@@ -19,7 +19,12 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  // survPollsTaken:{
+  //   type:Number,
+  //   default:0
+  // },
+  // attemped:[mongoose.Schema.Types.ObjectId]
 })
 
 // static signup method
