@@ -25,5 +25,5 @@ const pollSchema = new Schema({
     },
     options: [optionPollSchema],
     voted: [{type: Schema.Types.ObjectId, ref: 'User'}]
-});
+}, { timestamps: true });
 module.exports = mongoose.model('Poll', pollSchema);
