@@ -39,9 +39,15 @@ function App() {
               element={!user ? <Signup /> : <Navigate to='/' />} 
             />
 
-            <Route path="/greeting" element={<Greeting />} /> 
+            <Route
+              path="/greeting"
+              element={!user ? <Greeting /> : <Navigate to='/' />} 
+              />
             
-            <Route path="/survey/:id" element={<SurveyFillPage />} />
+            <Route
+              path="/survey/:id"
+              element={user ? <SurveyFillPage /> : <Navigate to="/" />}
+            />
           </Routes>
         </div>
       </BrowserRouter>

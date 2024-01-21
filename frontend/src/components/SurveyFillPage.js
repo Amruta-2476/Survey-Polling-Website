@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 const SurveyFillPage = () => {
@@ -7,6 +7,7 @@ const SurveyFillPage = () => {
     const { user } = useAuthContext();
     const [survey, setSurvey] = useState(null); // State to store survey details
     const [formResponses, setFormResponses] = useState({}); // State to store user responses
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Fetch survey details based on the id
@@ -20,6 +21,8 @@ const SurveyFillPage = () => {
                 if (response.ok) {
                     const surveyData = await response.json();
                     setSurvey(surveyData);
+                    // Navigate 
+                    navigate(`/survey/${id}`);
                 } else {
                     // Handle error when fetching survey details
                     console.error('Error fetching survey details');
@@ -30,7 +33,9 @@ const SurveyFillPage = () => {
         };
 
         fetchSurveyDetails();
-    }, [id]);
+    }, [id, user]);
+
+    
 
     const handleInputChange = (questionIndex, optionIndex, value) => {
         // Update the formResponses state based on user input
@@ -44,9 +49,7 @@ const SurveyFillPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Handle form submission, send formResponses to the server
-        // This may include making a POST request to submit user responses
-        // ...
-        // Example: Logging form responses for demonstration
+        
         try {
             const response = await fetch('/api/survey/response', {
                 method: 'POST',
@@ -61,6 +64,8 @@ const SurveyFillPage = () => {
             if (response.ok) {
                 // Handle success, e.g., show a success message or redirect
                 console.log('Survey response submitted successfully');
+                // // Navigate 
+                // navigate(`/survey/${id}`);
             } else {
                 // Handle error when submitting survey responses
                 console.error('Error submitting survey responses');
