@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const SurveyFillPage = () => {
     const { id } = useParams();
+    const { user } = useAuthContext();
     const [survey, setSurvey] = useState(null); // State to store survey details
     const [formResponses, setFormResponses] = useState({}); // State to store user responses
 
@@ -77,12 +79,12 @@ const SurveyFillPage = () => {
             <h2>Survey Fill Page for Survey ID: {id}</h2>
             {survey ? (
                 <>
-                    <h3>{survey.title}</h3>
+                    <h2>Title of the survey: <u>{survey.title}</u></h2>
                     <form onSubmit={handleSubmit}>
                         {/* Render survey questions and options based on survey data */}
                         {survey.questions.map((question, questionIndex) => (
                             <div key={questionIndex}>
-                                <p>{question.questionText}</p>
+                                <p> Q. {question.questionText}</p>
                                 {/* Render options for each question */}
                                 {question.options.map((option, optionIndex) => (
                                     <div key={optionIndex}>
@@ -103,7 +105,7 @@ const SurveyFillPage = () => {
                     </form>
                 </>
             ) : (
-                <p>Loading...</p>
+                <p>...</p>
             )}
         </div>
     );
