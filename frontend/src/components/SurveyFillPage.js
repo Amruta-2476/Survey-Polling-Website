@@ -22,7 +22,7 @@ const SurveyFillPage = () => {
                     const surveyData = await response.json();
                     setSurvey(surveyData);
                     // Navigate 
-                    navigate(`/survey/${id}`);
+                    navigate('/survey/:id');
                 } else {
                     // Handle error when fetching survey details
                     console.error('Error fetching survey details');
