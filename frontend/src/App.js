@@ -46,7 +46,7 @@ function App() {
             
             <Route
               path="/survey/:id"
-              element={user ? <SurveyFillPage /> : <Navigate to="/" />}
+              element={<SurveyFillPage />}
             />
           </Routes>
         </div>
