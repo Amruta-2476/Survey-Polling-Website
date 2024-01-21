@@ -21,8 +21,7 @@ const SurveyFillPage = () => {
                 if (response.ok) {
                     const surveyData = await response.json();
                     setSurvey(surveyData);
-                    // Navigate 
-                    navigate('/survey/:id');
+
                 } else {
                     // Handle error when fetching survey details
                     console.error('Error fetching survey details');
@@ -65,7 +64,7 @@ const SurveyFillPage = () => {
                 // Handle success, e.g., show a success message or redirect
                 console.log('Survey response submitted successfully');
                 // // Navigate 
-                // navigate(`/survey/${id}`);
+                navigate(`/survey/:id`);
             } else {
                 // Handle error when submitting survey responses
                 console.error('Error submitting survey responses');

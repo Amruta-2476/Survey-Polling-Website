@@ -17,6 +17,7 @@ const Signup = () => {
       <div className="form-container sign-up-container">
         <form onSubmit={handleSubmit}>
           <h1>Create Account</h1>
+          <p className="passMessage">Password must include a capital letter, a small letter, a number, a special character</p>
           <input
             type="text"
             name="username"
