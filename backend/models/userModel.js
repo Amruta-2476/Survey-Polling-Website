@@ -20,6 +20,8 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  polls: [{ type: Schema.Types.ObjectId, ref: 'Poll' }],
+  surveysTaken: [{ type: Schema.Types.ObjectId, ref: 'Survey' }],
   _id: mongoose.Schema.Types.ObjectId,
   // survPollsTaken:{
   //   type:Number,

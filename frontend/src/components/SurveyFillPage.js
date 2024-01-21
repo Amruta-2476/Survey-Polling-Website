@@ -9,19 +9,23 @@ const SurveyFillPage = () => {
     const [formResponses, setFormResponses] = useState({}); // State to store user responses
     const navigate = useNavigate();
 
-    useEffect(() => {
+useEffect(() => {
         // Fetch survey details based on the id
         const fetchSurveyDetails = async () => {
             try {
+                if (!user || !user.token) {
+                    // If user or user.token is not available, wait for it
+                    console.log('User or token not available yet');
+                    return;
+                }
                 const response = await fetch(`/api/survey/${id}`, {
                     headers: {
-                      'Authorization': `Bearer ${user.token}`, // Check how you retrieve the authentication token
+                        'Authorization': `Bearer ${user.token}`,
                     },
-                  });
+                });
                 if (response.ok) {
                     const surveyData = await response.json();
                     setSurvey(surveyData);
-
                 } else {
                     // Handle error when fetching survey details
                     console.error('Error fetching survey details');
@@ -30,8 +34,11 @@ const SurveyFillPage = () => {
                 console.error('Error fetching survey details:', error);
             }
         };
-
-        fetchSurveyDetails();
+    
+        // Fetch survey details only if user and token are available
+        if (user && user.token) {
+            fetchSurveyDetails();
+        }
     }, [id, user]);
 
     
