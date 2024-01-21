@@ -20,6 +20,7 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  _id: mongoose.Schema.Types.ObjectId,
   // survPollsTaken:{
   //   type:Number,
   //   default:0
@@ -56,8 +57,16 @@ userSchema.statics.signup = async function (username, email, password) {
   const salt = await bcrypt.genSalt(10)
   const hash = await bcrypt.hash(password, salt)
 
-  const user = await this.create({ username, email, password: hash })
-  return user
+    // Generate a new ObjectId for the user
+    const userId = new mongoose.Types.ObjectId();
+
+  const user = await this.create({
+    _id: userId,
+    username,
+    email,
+    password: hash
+  })
+  return user;
 }
 
 // static login method

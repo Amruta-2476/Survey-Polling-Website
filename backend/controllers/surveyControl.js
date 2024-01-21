@@ -26,6 +26,7 @@ const getOneSurvey = async (req, res) => {
 const createSurvey = async (req, res) => {
   try {
     const { title, questions } = req.body;
+    // const user = req.user;
 
     let emptyFields = []
     if (!title) {
@@ -51,10 +52,16 @@ const createSurvey = async (req, res) => {
       processedQuestions.push(processedQuestion);
     }
 
+     // Ensure that a user is logged in before creating the survey
+     if (!req.user) {
+      return res.status(401).json({ error: 'Unauthorized. User not logged in.' });
+    }
+
     // Create the survey with the processed questions
     const survey = await Survey.create({
       title,
       questions: processedQuestions,
+      user: req.user._id
     });
 
     res.status(200).json(survey);

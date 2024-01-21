@@ -35,7 +35,9 @@ const surveySchema = new Schema({
     
 // Method to calculate the number of people who have taken the survey
 surveySchema.methods.getNumberOfResponses = function () {
-  return this.responses.length;
+  return this.questions.reduce((totalResponses, question) => {
+    return totalResponses + question.responses.length;
+  }, 0);
 };
 
 // Method to calculate the number of people who have attempted all questions in the survey
