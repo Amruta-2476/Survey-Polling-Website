@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const surveyRoutes = require('./routes/survey')
 const userRoutes = require('./routes/user')
 const pollRoutes = require('./routes/poll')
+const surveyResRoutes = require('./routes/surveyResRoutes')
 
 const mongoUri = `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASS}@cluster0.m2hopr5.mongodb.net/?retryWrites=true&w=majority` 
 
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
 app.use('/api/survey', surveyRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/poll', pollRoutes)
+app.use('/api/survey/response', surveyResRoutes)
 
 // connect to db
 mongoose.connect(mongoUri)

@@ -1,26 +1,59 @@
 // app.use('/api/survey/response', surveyResRoutes)
 
-// surveyResRoutes.js
-import bodyParse from 'bo'
 const express = require('express');
+const requireAuth = require('../middleware/requireAuth');
+const mongoose = require('mongoose');
+const Survey = require('../models/Survey');
+const SurveyResponse = require('../models/surveyResModel'); // Import your SurveyResponse model
+
 const router = express.Router();
-const bodyParse = require('body-parser');
+router.use(requireAuth); // Require authentication for all survey response routes
 
-// POST /api/survey/response
-router.post('/', (req, res) => {
+// POST a new survey response
+router.post('/:id', async (req, res) => {
     try {
-        // Handle the survey response here
-        const { surveyId, responses } = req.body;
+        const { id } = req.params;
+        const { selectedOptions } = req.body;
 
-        // Process the survey response data as needed
-        // ...
+        // Validate if the survey exists
+        const survey = await Survey.findById(id);
+        if (!survey) {
+            return res.status(404).json({ error: 'No such survey' });
+        }
 
-        // Respond with a success message
-        res.status(200).json({ message: 'Survey response submitted successfully' });
+        // Validate if the user has already responded to the survey
+        const existingResponse = await SurveyResponse.findOne({
+            user: req.user._id,
+            survey: id,
+        });
+
+        if (existingResponse) {
+            return res.status(400).json({ error: 'You have already responded to this survey' });
+        }
+
+        // Validate if the selectedOptions array has the correct length
+        if (selectedOptions.length !== survey.questions.length) {
+            return res.status(400).json({ error: 'Invalid number of responses' });
+        }
+
+        // Create a new survey response
+        const newResponse = new SurveyResponse({
+            user: req.user._id,
+            survey: id,
+            responses: selectedOptions.map((selectedOption, index) => ({
+                questionIndex: index,
+                selectedOption,
+            })),
+        });
+
+        // Save the response to the database
+        await newResponse.save();
+
+        res.status(201).json({ message: 'Survey response submitted successfully' });
     } catch (error) {
-        console.error('Error handling survey response:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: error.message });
     }
 });
 
 module.exports = router;
+
