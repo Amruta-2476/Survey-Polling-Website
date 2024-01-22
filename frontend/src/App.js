@@ -55,6 +55,9 @@ function App() {
             <Route path="/success-survey"
               element={<SuccessSurvey />} />
             
+            {/* <Route path="/survey/response"
+              element={<SuccessSurvey />} /> */}
+            
           </Routes>
         </div>
       </BrowserRouter>

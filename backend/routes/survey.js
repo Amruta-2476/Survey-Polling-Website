@@ -4,7 +4,8 @@ const {
   getAllSurvey,
   getOneSurvey,
   deleteSurvey,
-  updateSurvey
+  updateSurvey,
+  surveyResponse
 } = require('../controllers/surveyControl')
 const requireAuth = require('../middleware/requireAuth')
 
@@ -26,4 +27,7 @@ router.delete('/:id', deleteSurvey)
   
 // UPDATE a survey
 router.patch('/:id', updateSurvey)
+
+// POST a new survey response
+router.post('/:id', surveyResponse)
 module.exports = router
