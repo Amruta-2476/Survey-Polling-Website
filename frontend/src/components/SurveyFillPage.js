@@ -73,7 +73,7 @@ useEffect(() => {
                 // Handle success, e.g., show a success message or redirect
                 console.log('Survey response submitted successfully');
                 // // Navigate 
-                navigate(`/success-survey-page`); 
+                navigate(`/success-survey`); 
             } else {
                 // Handle error when submitting survey responses
                 console.error('Error submitting survey responses');
