@@ -1,7 +1,7 @@
 const Poll = require('../models/PollModel')
 const mongoose = require('mongoose')
 
-// get all polls
+// get all poll
 const getAllPoll =  async (req, res) => {
     const poll = await Poll.find({}).sort({createdAt: -1})
     res.status(200).json(poll)
@@ -81,7 +81,8 @@ const updatePoll = async (req, res) => {
     }
     const poll = await Poll.findOneAndUpdate({_id: id}, {
       ...req.body
-    })
+    },
+    { new: true })
     if (!poll) {
       return res.status(400).json({error: 'No such poll'})
     }

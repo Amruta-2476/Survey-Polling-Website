@@ -9,6 +9,7 @@ const {
 const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
 
+
 // // pollRoutes
 // // require auth for all poll routes
 router.use(requireAuth)
@@ -27,4 +28,10 @@ router.delete('/:id', deletePoll)
   
 // UPDATE a poll
 router.patch('/:id', updatePoll)
+
+
 module.exports = router
+
+// const fs = require('fs').promises;
+// const path = require('path');
+// const dataFile = path.join(__dirname, 'data.json');

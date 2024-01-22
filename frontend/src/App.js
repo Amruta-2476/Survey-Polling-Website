@@ -11,6 +11,8 @@ import Login from './pages/Login'
 import Signup from './pages/SignUp'
 // import SurveyDetails from './SurveyDetails';
 import SurveyFillPage from './components/SurveyFillPage'; 
+import PollFillPage from "./components/PollFillPage";
+
 
 function App() {
   const { user } = useAuthContext()
@@ -26,10 +28,10 @@ function App() {
               path="/" 
               element={user ? <Home /> : <Navigate to="/login" />} 
             />
-            {/* <Route
+            <Route
               path="/pollHome" 
               element={user ? <PollHome /> : <Navigate to="/login" />} 
-            /> */}
+            />
             <Route 
               path="/login" 
               element={!user ? <Login /> : <Navigate to='/' />} 
@@ -47,6 +49,10 @@ function App() {
             <Route
               path="/survey/:id"
               element={<SurveyFillPage />}
+            />
+            <Route
+              path="/poll/:id"
+              element={<PollFillPage />}
             />
           </Routes>
         </div>
