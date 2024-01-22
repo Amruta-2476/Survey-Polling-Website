@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 app.use('/api/survey', surveyRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/poll', pollRoutes)
-app.use('/api/survey/surveyResponse')
+// app.use('/api/survey/surveyResponse')
 
 // connect to db
 mongoose.connect(mongoUri)
