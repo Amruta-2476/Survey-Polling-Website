@@ -52,6 +52,7 @@ useEffect(() => {
         }));
     };
 
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Handle form submission, send formResponses to the server
@@ -61,6 +62,7 @@ useEffect(() => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`,
                 },
                 body: JSON.stringify({
                     surveyId: id,
@@ -71,7 +73,7 @@ useEffect(() => {
                 // Handle success, e.g., show a success message or redirect
                 console.log('Survey response submitted successfully');
                 // // Navigate 
-                navigate(`/survey/:id`);
+                navigate(`/success-survey-page`); 
             } else {
                 // Handle error when submitting survey responses
                 console.error('Error submitting survey responses');

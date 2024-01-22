@@ -37,7 +37,7 @@ header a {
   cursor: pointer;
 }
 
-/* homepage */
+/* homepages */
 .home {
   display: grid;
   grid-template-columns: 2fr 1.5fr;
@@ -45,9 +45,24 @@ header a {
   max-width: 1000px;
   margin: 20px auto;
 }
+.poll-home {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr;
+  gap: 50px;
+  max-width: 1000px;
+  margin: 20px auto;
+}
+
 .home .create{
   padding: 14px;
-  margin-top: 18px;
+  margin-top: 10px;
+  border-radius: 20px;
+  background: #cfcece;
+  box-shadow: 6px 7px 18px rgb(116, 114, 114);  
+}
+.poll-home .create{
+  padding: 14px;
+  margin-top: 10px;
   border-radius: 20px;
   background: #cfcece;
   box-shadow: 6px 7px 18px rgb(116, 114, 114);  
@@ -61,7 +76,19 @@ header a {
   box-shadow: 2px 2px 5px rgba(0.3,0.3,0.5,0.5);
   cursor: pointer;
 }
+.poll-details {
+  background: #fff;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0.3,0.3,0.5,0.5);
+  cursor: pointer;
+}
 .survey-details:hover{
+  box-shadow: 6px 7px 20px grey;  
+}
+.poll-details:hover{
   box-shadow: 6px 7px 20px grey;  
 }
 .survey-details h4 {
@@ -69,7 +96,17 @@ header a {
   font-size: 1.2em;
   color: var(--primary);
 }
+.poll-details h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
 .survey-details p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+.poll-details p {
   margin: 0;
   font-size: 0.9em;
   color: #555;
@@ -84,8 +121,18 @@ header a {
   border-radius: 50%;
   color: #333;
 }
+.poll-details span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+}
 
-/* new workout form */
+/* new survey form */
 label, input {
   display: block;
 }
@@ -171,7 +218,15 @@ div.signup, div.login {
   text-decoration: none;
   color: #1aac83;
 }
-.getStarted:hover{
+.homeAfterSuccess{
+  font-weight: bold;
+  border: 2px solid #71dfc0 ;
+  padding: 12px;
+  border-radius: 25px;
+  text-decoration: none;
+  color: #1aac83;
+}
+.homeAfterSuccess:hover{
   cursor: pointer;
   position: relative;
   bottom: 6px;
