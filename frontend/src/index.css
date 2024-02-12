@@ -54,7 +54,7 @@ header a {
 }
 
 .home .create{
-  padding: 14px;
+  padding: 10px;
   margin-top: 10px;
   border-radius: 20px;
   background: #cfcece;
@@ -132,6 +132,27 @@ header a {
   color: #333;
 }
 
+.surveyFillPage{
+  border: 2px solid black ;
+  padding: 0px 10px 18px 24px;
+}
+.surveyQuestion{
+  margin: 0px 0px 0px 0px;
+}
+.surveyQuestion p{
+  margin-bottom: 0px;
+}
+.questionLabel{
+  padding: 5px 0px 5px 0px;
+}
+.radioLabel{
+  margin: 5px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+.submitSurvey{
+  margin-top: 15px;
+}
+
 /* new survey form */
 label, input {
   display: block;
@@ -139,7 +160,7 @@ label, input {
 input {
   padding: 10px;
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   width: 100%;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -153,6 +174,8 @@ form button {
   font-family: 'Merriweather', serif;
   border-radius: 4px;
   cursor: pointer;
+  /* float: left;
+  margin: 0px 9px 9px 9px; */
 }
 
 /* form button{

@@ -5,16 +5,14 @@ import { useAuthContext } from '../hooks/useAuthContext';
 const SurveyFillPage = () => {
     const { id } = useParams();
     const { user } = useAuthContext();
-    const [survey, setSurvey] = useState(null); // State to store survey details
-    const [formResponses, setFormResponses] = useState({}); // State to store user responses
+    const [survey, setSurvey] = useState(null);
+    const [formResponses, setFormResponses] = useState({});
     const navigate = useNavigate();
 
-useEffect(() => {
-        // Fetch survey details based on the id
+    useEffect(() => {
         const fetchSurveyDetails = async () => {
             try {
                 if (!user || !user.token) {
-                    // If user or user.token is not available, wait for it
                     console.log('User or token not available yet');
                     return;
                 }
@@ -27,36 +25,28 @@ useEffect(() => {
                     const surveyData = await response.json();
                     setSurvey(surveyData);
                 } else {
-                    // Handle error when fetching survey details
                     console.error('Error fetching survey details');
                 }
             } catch (error) {
                 console.error('Error fetching survey details:', error);
             }
         };
-    
-        // Fetch survey details only if user and token are available
+
         if (user && user.token) {
             fetchSurveyDetails();
         }
     }, [id, user]);
 
-    
-
     const handleInputChange = (questionIndex, optionIndex, value) => {
-        // Update the formResponses state based on user input
-        // This may vary depending on your form structure
         setFormResponses((prevResponses) => ({
             ...prevResponses,
             [questionIndex]: { ...prevResponses[questionIndex], [optionIndex]: value },
         }));
     };
 
-    
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission, send formResponses to the server
-        
+
         try {
             const response = await fetch('/api/survey/response', {
                 method: 'POST',
@@ -70,12 +60,9 @@ useEffect(() => {
                 }),
             });
             if (response.ok) {
-                // Handle success, e.g., show a success message or redirect
                 console.log('Survey response submitted successfully');
-                // // Navigate 
-                navigate(`/success-survey`); 
+                navigate(`/success-survey`);
             } else {
-                // Handle error when submitting survey responses
                 console.error('Error submitting survey responses');
             }
         } catch (error) {
@@ -83,12 +70,8 @@ useEffect(() => {
         }
     };
 
-    //   if (!survey) {
-    //     return <div>Loading...</div>; // You may want to display a loader while fetching survey details
-    //   }
-
     return (
-        <div>
+        <div className='surveyFillPage'>
             <h2>Survey Fill Page for Survey ID: {id}</h2>
             {survey ? (
                 <>
@@ -96,25 +79,26 @@ useEffect(() => {
                     <form onSubmit={handleSubmit}>
                         {/* Render survey questions and options based on survey data */}
                         {survey.questions.map((question, questionIndex) => (
-                            <div key={questionIndex}>
-                                <p> Q. {question.questionText}</p>
+                            <div key={questionIndex} className="surveyQuestion">
+                                <p>{`Q${questionIndex + 1}. ${question.questionText}`}</p>
                                 {/* Render options for each question */}
                                 {question.options.map((option, optionIndex) => (
                                     <div key={optionIndex}>
-                                        <label>
+                                        <label className='questionLabel'>
                                             <input
+                                                className='radioLabel'
                                                 type="radio"
                                                 name={`question_${questionIndex}`}
                                                 value={optionIndex}
                                                 onChange={(e) => handleInputChange(questionIndex, optionIndex, e.target.value)}
                                             />
-                                            {option}
+                                            {`${String.fromCharCode(97 + optionIndex)}. ${option}`}
                                         </label>
                                     </div>
                                 ))}
                             </div>
                         ))}
-                        <button type="submit">Submit Survey</button>
+                        <button type="submit" className='submitSurvey'>Submit Survey</button>
                     </form>
                 </>
             ) : (
@@ -123,4 +107,5 @@ useEffect(() => {
         </div>
     );
 }
+
 export default SurveyFillPage;
